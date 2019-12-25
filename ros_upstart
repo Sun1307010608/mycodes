@@ -1,0 +1,36 @@
+ros 开机自启动程序设置记录:
+参考网址: https://blog.csdn.net/zong596568821xp/article/details/78596473
+
+1, 安装 robot_upstart,  
+	sudo apt-get install ros-kinetic-robot-upstart 
+
+2, 设置某个功能包下的 launch 为开机启动的launch, (以 catkin_ws 工作空间为例子)
+	source ~/catkin_ws/devel/setup.bash
+	rosrun robot_upstart install setup/launch/matching.launch  //其中,setup 是 catkin_ws/src 目录下的功能包,这里若运行roscd setup没有问题, 那这一步运行应该不会有问题.
+
+3, 运行后打印的相关信息如下:
+sun@sun-Z370-HD3:~/catkin_ws$ source devel/setup.bash 
+sun@sun-Z370-HD3:~/catkin_ws$ rosrun robot_upstart install setup/launch/matching.launch
+/lib/systemd/systemd
+Preparing to install files to the following paths:
+  /etc/ros/kinetic/setup.d/.installed_files
+  /etc/ros/kinetic/setup.d/matching.launch
+  /etc/systemd/system/multi-user.target.wants/setup.service
+  /lib/systemd/system/setup.service
+  /usr/sbin/setup-start
+  /usr/sbin/setup-stop
+Now calling: /usr/bin/sudo /opt/ros/kinetic/lib/robot_upstart/mutate_files
+Filesystem operation succeeded.
+** To complete installation please run the following command:
+ sudo systemctl daemon-reload && sudo systemctl start setup
+sun@sun-Z370-HD3:~/catkin_ws$ 
+
+4, 根据上面的提示运行: 
+	sudo systemctl daemon-reload && sudo systemctl start setup   //此时launch程序就已经启动了, 若重启电脑, 在System Monitor中会看到matching.launch中的各个节点都已经启动;
+	
+5, 关于取消开机自启动(rosrun robot_upstart uninstall service名, 从步骤3或者4可以知道, service名为 setup):
+	rosrun robot_upstart uninstall setup
+
+6, service 的启动和停止:
+	sudo service beacool service名
+	sudo service beacool service名
