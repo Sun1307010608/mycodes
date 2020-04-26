@@ -1,4 +1,4 @@
-**Bresenham算法demo, 用于在图像上画直线和圆。**
+**Bresenham算法demo, 用于在图像上画直线和圆。** 
 
 编译：
 
