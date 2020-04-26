@@ -2,7 +2,9 @@
 
 编译：
 mkdir build && cd build
+
 cmake ..
+
 make
 
 使用方法： ./bresenham_test <图像名>
