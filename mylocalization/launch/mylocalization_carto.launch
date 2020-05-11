@@ -1,0 +1,12 @@
+<!--  -->
+
+<launch>
+	<node pkg="mylocalization" name="mylocalization_carto" type="mylocalization_carto" output="screen" >
+		<param name="points_topic" value="/horizontal_laser_2d" />
+		<param name="grid_resolution" value="0.05" />
+		<param name="grid_height" value="2500" />
+		<param name="grid_width" value="2500" />
+	</node>
+	
+	<node pkg="rviz" name="rviz" type="rviz" args="-d $(find mylocalization)/rviz/mylocalization_carto.rviz" />
+</launch>

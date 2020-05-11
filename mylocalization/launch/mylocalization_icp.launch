@@ -1,0 +1,10 @@
+<!--  -->
+
+<launch>
+	<node pkg="mylocalization" name="mylocalization_icp" type="mylocalization_icp" output="screen" >
+		<param name="points_topic" value="lidar_points" />
+		<param name="voxel_leaf_size" value="0.5" />
+	</node>
+	
+	<node pkg="rviz" name="rviz" type="rviz" args="-d $(find mylocalization)/rviz/mylocalization.rviz" />
+</launch>
